@@ -1,7 +1,11 @@
 package com.example.cameratask.ui.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+   val isCameraButtonClicked:MutableLiveData<Boolean>?=MutableLiveData()
+    val isGalleryClicked:MutableLiveData<Boolean>?=MutableLiveData()
+
+
 }

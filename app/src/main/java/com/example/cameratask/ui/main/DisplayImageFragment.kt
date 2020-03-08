@@ -1,12 +1,13 @@
 package com.example.cameratask.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.cameratask.R
+import kotlinx.android.synthetic.main.main_fragment.*
 
 class DisplayImageFragment : Fragment() {
 
@@ -14,7 +15,7 @@ class DisplayImageFragment : Fragment() {
         fun newInstance() = DisplayImageFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private  var mainViewModel: MainViewModel?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +26,38 @@ class DisplayImageFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        mainViewModel = activity?.let { ViewModelProvider(it).get(MainViewModel::class.java) }
+        setOnClickListeners()
+    }
+
+    /*
+   * ***************** setting on click listeners on view  *****************************************
+   * */
+
+    private fun setOnClickListeners() {
+        btnCamera.setOnClickListener {
+            startCameraActivity()
+        }
+
+        btnGallery.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    /*
+    * ***************** Function used to start camera using view model *****************************
+    * */
+
+    private fun startCameraActivity() {
+        mainViewModel?.isGalleryClicked?.value = true
+    }
+
+    /*
+   * ***************** Function used to open  gallery using view model *****************************
+   * */
+
+    private fun openGallery() {
+
     }
 
 }
